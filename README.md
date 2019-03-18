@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# First React Project
+
+A repo to build and experiment with ReactJS. Hi Brandon
 
 ## Available Scripts
 
