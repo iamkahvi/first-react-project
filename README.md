@@ -2,6 +2,8 @@
 
 A repo to build and experiment with ReactJS. Hi Brandon
 
+[This](https://youtu.be/sBws8MSXN7A) is the tutorial I'm following.
+
 ## Available Scripts
 
 In the project directory, you can run:
