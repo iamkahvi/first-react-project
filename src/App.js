@@ -7,6 +7,7 @@ import About from './components/pages/About';
 import Chart from './components/pages/Chart';
 // import uuid from 'uuid';
 import axios from 'axios';
+import tarantino from './data/tarantino.json';
 
 class App extends Component {
   state = {
@@ -41,6 +42,7 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <Router>
         <div className="App">
@@ -64,7 +66,15 @@ class App extends Component {
               </div>
             </React.Fragment>
           )}/>
-          <Route path="/chart" component={ Chart }/>
+          <Route path="/chart" render={props => (
+            <React.Fragment>
+              <div style={{ marginBottom: '50px', width: '500px', margin: 'auto' }}>
+                <Chart 
+                  data={tarantino}
+                />
+              </div>
+            </React.Fragment>
+          )} />
         </div>
       </Router>
     );
