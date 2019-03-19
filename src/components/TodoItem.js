@@ -11,22 +11,32 @@ export class TodoItem extends Component {
   render() {
     const { id, title } = this.props.todo;
     return (
-      <li style={this.getStyle()} class="list-group-item list-group-item-action">
-          <p style={{ marginTop: '1rem'}} >
-          <input type="checkbox" onChange={this.props.markComplete.bind(this, id)} /> {' '}
-          {title}
-            { '  ' }
-          <button type="button" style={btnStyle} class="btn btn-danger" onClick={this.props.deleteItem.bind(this, id)}>X</button>
-          </p>
+      <li style={this.getStyle()} className="list-group-item list-group-item-action">
+            <input 
+              type="checkbox" 
+              onChange={this.props.markComplete.bind(this, id)} 
+            /> 
+            {' '} {title} { '  ' }
+            <button 
+              type="button" 
+              style={btnStyle} 
+              className="btn btn-danger" 
+              onClick={this.props.deleteItem.bind(this, id)}
+            >
+              X
+            </button>
       </li>
     )
   }
 }
 
 const btnStyle = {
-  backgroundColor: '#ff0000',
+  backgroundColor: '#ef5350',
   border: 'none',
   float: 'right',
+  verticalAlign: 'middle',
+  paddingTop: '0',
+  paddingBottom: '0'
 }
 
 // PropTypes
