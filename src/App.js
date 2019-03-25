@@ -14,17 +14,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [],
-      stats: []
+      todos: []
     }
   }
 
   componentDidMount() {
     axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
       .then(res => this.setState({ todos: res.data }))
-
-    axios.get('http://data.nba.net/prod/v1/2016/team_stats_rankings.json')
-      .then(res => this.setState({ stats: res.data }))
+      
   }
 
   // Toggle Complete
@@ -79,7 +76,6 @@ class App extends Component {
               <div style={{ marginBottom: '50px', width: '500px', margin: 'auto' }}>
                 <Chart 
                   data={tarantino}
-                  stats={this.state.stats}
                 />
               </div>
             </React.Fragment>
