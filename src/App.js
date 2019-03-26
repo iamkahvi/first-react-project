@@ -10,13 +10,18 @@ import axios from 'axios';
 import tarantino from './data/tarantino.json';
 
 class App extends Component {
-  state = {
-    todos: []
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: []
+    }
   }
 
   componentDidMount() {
     axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
       .then(res => this.setState({ todos: res.data }))
+      
   }
 
   // Toggle Complete
