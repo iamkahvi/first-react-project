@@ -1,5 +1,7 @@
 import Plot from "react-plotly.js";
 import React, { Component } from 'react';
+import suicideData from "../../data/suicideData.json";
+import FIFAdata from "../../data/FIFA.json";
 import axios from "axios";
 
 export class Chart extends Component {
@@ -8,7 +10,8 @@ export class Chart extends Component {
     super(props);
     this.state = {
       pop: [],
-      census: [],
+      dsKaggle: [],
+      dsFIFA: [],
       name: ''
     }
   }
@@ -21,6 +24,19 @@ export class Chart extends Component {
       .then(data => this.setState({ pop : data.data[1] }))
 
     this.setState({ name : 'Kahvi' })
+
+    const dsFinal = suicideData
+      .filter(el => {
+        return el.country === "Canada" && el.age === "25-34 years";
+      })
+
+    this.setState({ dsKaggle : dsFinal})
+
+    this.setState({ dsFIFA : FIFAdata.filter(el => {
+      return el.Club === "FC Barcelona";
+    })})
+
+    console.log(this.state.dsFIFA)
   }
 
   dateList() {
@@ -33,6 +49,111 @@ export class Chart extends Component {
         })}
       </ul>
     )
+  }
+
+  plot4() {
+
+    const age = this.state.dsFIFA.map(element => element.Age);
+    const rating = this.state.dsFIFA.map(element => element.Overall);
+    const name = this.state.dsKaggle.map(element => element.Name);
+
+    return (
+      <div>
+        <Plot
+          data={[
+            {
+              x: age,
+              y: rating,
+              type: "scatter",
+              mode: "markers+text",
+              text: name,
+              textposition: 'top center',
+              textfont: {
+                family: 'Raleway, sans-serif'
+              },
+              marker: {
+                color: "blue"
+              }
+            }
+          ]}
+          layout={{
+            width: "100%",
+            height: "600px",
+            title: "FC Barcelona (Rating vs Age)"
+          }}
+          config={{ displayModeBar: false }}
+        />
+      </div>
+    );
+
+  }
+
+  plot3() {
+
+    const year = this.state.dsKaggle.map(element => element.year);
+
+    const rateM = this.state.dsKaggle
+      .filter(el => {
+        return el.sex === "male";
+      })
+      .map(element => element.suicides_no)
+
+    const rateF = this.state.dsKaggle
+      .filter(el => {
+        return el.sex === "female";
+      })
+      .map(element => element.suicides_no)
+
+    const GDP = this.state.dsKaggle
+      .filter(el => {
+        return el.sex === "female";
+      })
+      .map(element => element['gdp_per_capita ($)']/1000)
+
+    return (
+      <div>
+        <Plot
+          data={[
+            {
+              x: year,
+              y: rateM,
+              type: "scatter",
+              name: "Male Suicides",
+              mode: "markers",
+              marker: {
+                color: "blue"
+              }
+            },
+            {
+              x: year,
+              y: rateF,
+              type: "scatter",
+              name: "Female Suicides",
+              mode: "markers",
+              marker: {
+                color: "pink"
+              }
+            },
+            {
+              x: year,
+              y: GDP,
+              type: "line",
+              name: "GDP per capita ($1000s)",
+              marker: {
+                color: "red"
+              }
+            }
+          ]}
+          layout={{
+            width: "100%",
+            height: "600px",
+            title: "Suicide # over Time"
+          }}
+          config={{ displayModeBar: false }}
+        />
+      </div>
+    );
+
   }
 
   plot1() {
@@ -98,11 +219,8 @@ export class Chart extends Component {
 
     return (
       <div>
-        {this.plot1()}
-        {this.plot2()}
-
-        {/*         {this.dateList()}
-         */}
+        {this.plot4()}
+        {this.plot3()}
       </div>
     );
   }
