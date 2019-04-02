@@ -6,6 +6,7 @@
     "@google-cloud/bigquery": "^2.1.0",
     "axios": "^0.18.0",
     "cli-highlight": "^2.0.0",
+    "csvtojson": "^2.0.8",
     "node-fetch": "^2.3.0",
     "plotly": "^1.0.6",
     "plotly.js": "^1.45.2",

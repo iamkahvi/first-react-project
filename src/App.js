@@ -73,11 +73,9 @@ class App extends Component {
           )}/>
           <Route path="/chart" render={props => (
             <React.Fragment>
-              <div style={{ marginBottom: '50px', width: '500px', margin: 'auto' }}>
                 <Chart 
                   data={tarantino}
                 />
-              </div>
             </React.Fragment>
           )} />
         </div>
